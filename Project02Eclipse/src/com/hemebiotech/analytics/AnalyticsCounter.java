@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class AnalyticsCounter {
 
+    private String inputFilepath;
+    private String exitFilepath;
 
     public static void main(String... args) throws Exception {
         /*
@@ -12,6 +14,7 @@ public class AnalyticsCounter {
          *
          * TODO : Comment the code to give explaination of what is done
          */
+
 
 
         try {
@@ -28,8 +31,16 @@ public class AnalyticsCounter {
             e.getStackTrace();
         }
 
+//        public void read(String inputFilepath){
+//
+//        };
+//
+//        public void sort();
+//
+//        public void write();
 
-//// first get input
+
+//// first getinput
 //		BufferedReader reader = new BufferedReader (new FileReader("Project02Eclipse/symptoms.txt"));
 //		String line = reader.readLine();
 //		int i = 0;	// set i to 0
