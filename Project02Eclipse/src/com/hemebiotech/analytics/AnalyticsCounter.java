@@ -2,34 +2,36 @@ package com.hemebiotech.analytics;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class AnalyticsCounter {
 
-    private String inputFilepath;
-    private String exitFilepath;
+    /**
+     * Read the list of symptoms and sorts the alphabetically with a counter per symptom
+     *
+     * @param parsedSymptoms a list of symptoms extracted from a symptoms file that needs to be sorted and counted.
+     */
+    public Map<String, Integer> SortAndCount(List<String> parsedSymptoms) {
 
-    public static void main(String... args) throws Exception {
-        /*
-         * TODO : Add Throwable in all the code that use java.lang.Exception throwables
-         *
-         * TODO : Comment the code to give explaination of what is done
-         */
+        Map<String, Integer> sortedSymptoms = new TreeMap<>();
 
-
-
-        try {
-            ReadSymptomDataFromFile readSymptomDataFromFile = new ReadSymptomDataFromFile("Project02Eclipse/symptoms.txt");
-
-            List<String> symptoms = readSymptomDataFromFile.GetSymptoms();
-
-            SortAndCountSymptoms sortAndCountSymptoms = new SortAndCountSymptoms();
-            Map<String, Integer> sortedSymptoms = sortAndCountSymptoms.SortAndCount(symptoms);
-
-            new WriteResultInFile("Project02Eclipse/result.txt", sortedSymptoms);
-
-        } catch (Exception e) {
-            e.getStackTrace();
+//  Parsing the list to count the symptoms and adding them to an alphabetically sorted Map
+        if (!parsedSymptoms.isEmpty()) {
+            for (String valueRed : parsedSymptoms) {
+                if (sortedSymptoms.containsKey(valueRed)) {
+                    int oldCount = sortedSymptoms.get(valueRed);
+                    sortedSymptoms.put(valueRed, ++oldCount);
+                } else {
+                    sortedSymptoms.put(valueRed, 1);
+                }
+            }
+        } else {
+            System.out.println("The list is empty");
         }
+
+        return sortedSymptoms;
+    }
+
 
 //        public void read(String inputFilepath){
 //
@@ -68,5 +70,5 @@ public class AnalyticsCounter {
 //		writer.write("rash: " + rashCount + "\n");
 //		writer.write("dialated pupils: " + pupilCount + "\n");
 //		writer.close();
-    }
+
 }

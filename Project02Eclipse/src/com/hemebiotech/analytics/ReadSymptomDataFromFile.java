@@ -11,35 +11,41 @@ import java.util.List;
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
-	private String filepath;
+    private final String filepath;
 
-	/**
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
-	 */
-	public ReadSymptomDataFromFile(String filepath) {
-		this.filepath = filepath;
-	}
+    /**
+     * @param filepath a full or partial path to file with symptom strings in it, one per line
+     */
+    public ReadSymptomDataFromFile(String filepath) {
+        this.filepath = filepath;
+    }
 
-	@Override
-	public List<String> GetSymptoms() {
-		ArrayList<String> result = new ArrayList<String>();
+    /**
+     * Reading the symptoms from the symptoms file
+     *
+     * @return A list of String that countains the symptoms
+     */
+    @Override
+    public List<String> GetSymptoms() {
 
-		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader(new FileReader(filepath));
-				String line = reader.readLine();
+        ArrayList<String> result = new ArrayList<>();
 
-				while (line != null) {
-					result.add(line);
-					line = reader.readLine();
-				}
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+        if (filepath != null) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(filepath));
+                String line = reader.readLine();
 
-		return result;
-	}
+                while (line != null) {
+                    result.add(line);
+                    line = reader.readLine();
+                }
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return result;
+    }
 
 }

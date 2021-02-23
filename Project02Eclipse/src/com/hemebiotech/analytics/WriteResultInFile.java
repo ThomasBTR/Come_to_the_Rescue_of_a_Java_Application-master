@@ -7,21 +7,17 @@ import java.util.Map;
 
 public class WriteResultInFile {
 
-    private String filepath;
-    private Map<String, Integer> sortedSymptoms;
-
-
     /**
+     * Write the SortedSymptoms into a text result file
+     *
      * @param filepath       a full or partial path to file where the results will be written.
      * @param sortedSymptoms a sorted Map countaining the Symptoms as key sorted alphabetically and their count as value.
      */
-
     public WriteResultInFile(String filepath, Map<String, Integer> sortedSymptoms) {
 
         if (filepath != null) {
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
-                int mapsize = 0;
 
                 for (Map.Entry<String, Integer> entry : sortedSymptoms.entrySet()) {
                     writer.write(entry.getKey());
