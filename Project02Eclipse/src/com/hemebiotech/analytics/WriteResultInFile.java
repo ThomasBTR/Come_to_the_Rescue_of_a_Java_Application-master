@@ -3,34 +3,43 @@ package com.hemebiotech.analytics;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
-public class WriteResultInFile {
+public class WriteResultInFile implements ISymptomWriter {
+
+    private final String filepath;
+
+    public WriteResultInFile(String filepath) {
+        this.filepath = filepath;
+    }
 
     /**
-     * Write the SortedSymptoms into a text result file
+     * Writing sorted symptoms onto a text file
      *
-     * @param filepath       a full or partial path to file where the results will be written.
-     * @param sortedSymptoms a sorted Map countaining the Symptoms as key sorted alphabetically and their count as value.
+     * @param sortedSymptoms sorted symptoms
+     * @return An arrayList of the data written. If an
      */
-    public WriteResultInFile(String filepath, Map<String, Integer> sortedSymptoms) {
+    public ArrayList<String> write(Map<String, Integer> sortedSymptoms) {
 
-        if (filepath != null) {
+        ArrayList<String> lineWritten = null;
+        if (this.filepath != null) {
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
 
+                lineWritten = new ArrayList<>();
+
                 for (Map.Entry<String, Integer> entry : sortedSymptoms.entrySet()) {
-                    writer.write(entry.getKey());
-                    writer.write(" : ");
-                    writer.write(entry.getValue().toString());
+                    String line = entry.getKey() + " : " + entry.getValue().toString();
+                    lineWritten.add(line);
+                    writer.write(line);
                     writer.newLine();
                 }
                 writer.close();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
+        return lineWritten;
     }
 }
