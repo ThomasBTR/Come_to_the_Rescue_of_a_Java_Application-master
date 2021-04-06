@@ -2,8 +2,8 @@ package com.hemebiotech.analytics;
 
 public class RunAnalytic {
 
-    private static final String INPUT_FILEPATH = "Project02Eclipse/symptoms.txt";
-    private static final String EXIT_FILEPATH = "Project02Eclipse/result.txt";
+    private static final String INPUT_FILEPATH = "symptoms.txt";
+    private static final String EXIT_FILEPATH = "result.out";
 
 
     public static void main(String... args) {
